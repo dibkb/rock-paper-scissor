@@ -33,10 +33,11 @@ function renderWinningPage(weaponOne, weaponTwo) {
     result.setAttribute("class", "result");
     const userResult = renderResult(weaponOne, "user");
     const computerResult = renderResult(weaponTwo, "comp");
-    const win = calculateWin(weaponOne, weaponTwo);
+    const score = calculateWin(weaponOne, weaponTwo);
     result.appendChild(userResult);
     result.appendChild(computerResult);
     body.appendChild(result);
+    body.appendChild(score);
 }
 const renderResult = function (weapon, user) {
     const result = document.createElement("main");
@@ -56,6 +57,7 @@ const renderResult = function (weapon, user) {
 };
 const calculateWin = function (user, comp) {
     const p = document.createElement("p");
+    p.setAttribute("class", "score");
     if (user === comp) {
         p.innerHTML = result.DRAW;
         return p;
@@ -64,25 +66,31 @@ const calculateWin = function (user, comp) {
         case "rock": {
             if (comp === "paper") {
                 p.innerHTML = result.LOOSE;
+                break;
             }
             else if (comp === "scissor") {
                 p.innerHTML = result.WIN;
+                break;
             }
         }
         case "paper": {
             if (comp === "scissor") {
                 p.innerHTML = result.LOOSE;
+                break;
             }
             else if (comp === "rock") {
                 p.innerHTML = result.WIN;
+                break;
             }
         }
         case "scissor": {
-            if (comp === "paper") {
+            if (comp === "rock") {
                 p.innerHTML = result.LOOSE;
+                break;
             }
-            else if (comp === "scissor") {
+            else if (comp === "paper") {
                 p.innerHTML = result.WIN;
+                break;
             }
         }
     }
