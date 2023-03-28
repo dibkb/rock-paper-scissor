@@ -11,11 +11,9 @@ paper.addEventListener("click", handleClick);
 scissor.addEventListener("click", handleClick);
 function handleClick() {
     selectedItem = this;
-    body.removeChild(body.children[0]);
     body.textContent = "";
     const weaponOne = selectedItem.id;
     const weaponTwo = computerWeapon();
-    console.log(weaponOne, weaponTwo);
     // render winning page-accordingly
     renderWinningPage(weaponOne, weaponTwo);
 }
@@ -35,13 +33,14 @@ function renderWinningPage(weaponOne, weaponTwo) {
     result.setAttribute("class", "result");
     const userResult = renderResult(weaponOne, "user");
     const computerResult = renderResult(weaponTwo, "comp");
+    const win = calculateWin(weaponOne, weaponTwo);
     result.appendChild(userResult);
     result.appendChild(computerResult);
     body.appendChild(result);
 }
 const renderResult = function (weapon, user) {
     const result = document.createElement("main");
-    result.setAttribute("class", "user-result");
+    result.setAttribute("class", `${user}-result`);
     const p = document.createElement("p");
     if (user === "comp") {
         p.innerHTML = "Computer Choose";
@@ -54,4 +53,22 @@ const renderResult = function (weapon, user) {
     result.appendChild(p);
     result.appendChild(img);
     return result;
+};
+const calculateWin = function (user, comp) {
+    const p = document.createElement("p");
+    let innerHTML;
+    if (user === comp) {
+        innerHTML = result.DRAW;
+    }
+    switch (user) {
+        case "rock":
+        case "paper":
+        case "scissor":
+    }
+    return p;
+};
+const result = {
+    WIN: "You Win :)",
+    LOOSE: "YOU LOOSE :(",
+    DRAW: "It's a Draw :|",
 };
