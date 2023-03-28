@@ -12,10 +12,10 @@ scissor.addEventListener("click", handleClick);
 function handleClick() {
     selectedItem = this;
     body.textContent = "";
-    const weaponOne = selectedItem.id;
-    const weaponTwo = computerWeapon();
+    const weaponUser = selectedItem.id;
+    const weaponComp = computerWeapon();
     // render winning page-accordingly
-    renderWinningPage(weaponOne, weaponTwo);
+    renderWinningPage(weaponUser, weaponComp);
 }
 function computerWeapon() {
     const score = (Math.floor(Math.random() * 3) + 1);
@@ -28,16 +28,18 @@ function computerWeapon() {
             return "scissor";
     }
 }
-function renderWinningPage(weaponOne, weaponTwo) {
+function renderWinningPage(weaponUser, weaponComp) {
     const result = document.createElement("section");
     result.setAttribute("class", "result");
-    const userResult = renderResult(weaponOne, "user");
-    const computerResult = renderResult(weaponTwo, "comp");
-    const score = calculateWin(weaponOne, weaponTwo);
+    const userResult = renderResult(weaponUser, "user");
+    const computerResult = renderResult(weaponComp, "comp");
+    const score = calculateWin(weaponUser, weaponComp);
+    const button = addPlayAgainButton();
     result.appendChild(userResult);
     result.appendChild(computerResult);
     body.appendChild(result);
     body.appendChild(score);
+    body.appendChild(button);
 }
 const renderResult = function (weapon, user) {
     const result = document.createElement("main");
@@ -96,6 +98,15 @@ const calculateWin = function (user, comp) {
     }
     return p;
 };
+function addPlayAgainButton() {
+    const button = document.createElement("button");
+    button.innerHTML = "Play Again";
+    button.setAttribute("class", "button");
+    button.addEventListener("click", function () {
+        window.location.reload();
+    });
+    return button;
+}
 const result = {
     WIN: "You Win :)",
     LOOSE: "YOU LOOSE :(",

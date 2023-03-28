@@ -11,10 +11,10 @@ scissor.addEventListener("click", handleClick);
 function handleClick(this: HTMLElement): void {
   selectedItem = this;
   body.textContent = "";
-  const weaponOne = selectedItem.id as weapon;
-  const weaponTwo = computerWeapon() as weapon;
+  const weaponUser = selectedItem.id as weapon;
+  const weaponComp = computerWeapon() as weapon;
   // render winning page-accordingly
-  renderWinningPage(weaponOne, weaponTwo);
+  renderWinningPage(weaponUser, weaponComp);
 }
 function computerWeapon(): weapon {
   const score = (Math.floor(Math.random() * 3) + 1) as scoreType;
@@ -27,16 +27,18 @@ function computerWeapon(): weapon {
       return "scissor";
   }
 }
-function renderWinningPage(weaponOne: weapon, weaponTwo: weapon) {
+function renderWinningPage(weaponUser: weapon, weaponComp: weapon) {
   const result = document.createElement("section");
   result.setAttribute("class", "result");
-  const userResult = renderResult(weaponOne, "user");
-  const computerResult = renderResult(weaponTwo, "comp");
-  const score = calculateWin(weaponOne, weaponTwo);
+  const userResult = renderResult(weaponUser, "user");
+  const computerResult = renderResult(weaponComp, "comp");
+  const score = calculateWin(weaponUser, weaponComp);
+  const button = addPlayAgainButton();
   result.appendChild(userResult);
   result.appendChild(computerResult);
   body.appendChild(result);
   body.appendChild(score);
+  body.appendChild(button);
 }
 const renderResult: renderResultType = function (weapon, user) {
   const result = document.createElement("main");
@@ -92,6 +94,15 @@ const calculateWin: calculateWinType = function (user, comp) {
   }
   return p;
 };
+function addPlayAgainButton(): HTMLButtonElement {
+  const button = document.createElement("button");
+  button.innerHTML = "Play Again";
+  button.setAttribute("class", "button");
+  button.addEventListener("click", function () {
+    window.location.reload();
+  });
+  return button;
+}
 const result: resultType = {
   WIN: "You Win :)",
   LOOSE: "YOU LOOSE :(",
