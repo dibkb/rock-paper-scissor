@@ -4,7 +4,7 @@ const paper = document.getElementById("paper");
 const scissor = document.getElementById("scissor");
 const body = document.querySelector("body");
 const heading = document.querySelector("p.heading");
-// add eventlisterns------------------
+// ------------------------add eventlisteners------------------
 let selectedItem;
 rock.addEventListener("click", handleClick);
 paper.addEventListener("click", handleClick);
@@ -13,9 +13,19 @@ function handleClick(ev) {
     selectedItem = this;
     body.removeChild(body.children[0]);
     body.textContent = "";
-    console.log(selectedItem);
-    //   body?.removeChild(rock);
-    //   body?.removeChild(paper);
-    //   body?.removeChild(scissor);
-    //   body?.removeChild(heading);
+    const weaponOne = selectedItem.id;
+    const weaponTwo = computerWeapon();
+    console.log(weaponOne, weaponTwo);
+    // render winning page-accordingly
+}
+function computerWeapon() {
+    const score = (Math.floor(Math.random() * 3) + 1);
+    switch (score) {
+        case 1:
+            return "rock";
+        case 2:
+            return "paper";
+        case 3:
+            return "scissor";
+    }
 }
