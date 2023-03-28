@@ -33,13 +33,25 @@ function computerWeapon() {
 function renderWinningPage(weaponOne, weaponTwo) {
     const result = document.createElement("section");
     result.setAttribute("class", "result");
-    const userResult = document.createElement("main");
-    userResult.setAttribute("class", "user-result");
-    userResult.innerHTML = weaponOne;
-    const computerResult = document.createElement("main");
-    computerResult.setAttribute("class", "comp-result");
-    computerResult.innerHTML = weaponTwo;
+    const userResult = renderResult(weaponOne, "user");
+    const computerResult = renderResult(weaponTwo, "comp");
     result.appendChild(userResult);
     result.appendChild(computerResult);
     body.appendChild(result);
 }
+const renderResult = function (weapon, user) {
+    const result = document.createElement("main");
+    result.setAttribute("class", "user-result");
+    const p = document.createElement("p");
+    if (user === "comp") {
+        p.innerHTML = "Computer Choose";
+    }
+    if (user === "user") {
+        p.innerHTML = "You Choose";
+    }
+    const img = document.createElement("img");
+    img.setAttribute("src", `../assets/${weapon}.png`);
+    result.appendChild(p);
+    result.appendChild(img);
+    return result;
+};

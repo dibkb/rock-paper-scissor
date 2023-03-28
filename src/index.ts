@@ -1,14 +1,14 @@
-const rock = document.getElementById("rock") as HTMLMediaElement;
-const paper = document.getElementById("paper") as HTMLMediaElement;
-const scissor = document.getElementById("scissor") as HTMLMediaElement;
+const rock = document.getElementById("rock") as HTMLElement;
+const paper = document.getElementById("paper") as HTMLElement;
+const scissor = document.getElementById("scissor") as HTMLElement;
 const body = document.querySelector("body") as HTMLBodyElement;
 const heading = document.querySelector("p.heading") as HTMLParagraphElement;
 // ------------------------add eventlisteners------------------
-let selectedItem: HTMLMediaElement;
+let selectedItem: HTMLElement;
 rock.addEventListener("click", handleClick);
 paper.addEventListener("click", handleClick);
 scissor.addEventListener("click", handleClick);
-function handleClick(this: HTMLMediaElement): void {
+function handleClick(this: HTMLElement): void {
   selectedItem = this;
   body.removeChild(body.children[0]);
   body.textContent = "";
@@ -32,15 +32,28 @@ function computerWeapon(): weapon {
 function renderWinningPage(weaponOne: weapon, weaponTwo: weapon) {
   const result = document.createElement("section");
   result.setAttribute("class", "result");
-  const userResult = document.createElement("main");
-  userResult.setAttribute("class", "user-result");
-  userResult.innerHTML = weaponOne;
-  const computerResult = document.createElement("main");
-  computerResult.setAttribute("class", "comp-result");
-  computerResult.innerHTML = weaponTwo;
+  const userResult = renderResult(weaponOne, "user");
+  const computerResult = renderResult(weaponTwo, "comp");
   result.appendChild(userResult);
   result.appendChild(computerResult);
   body.appendChild(result);
 }
+const renderResult: renderResultType = function (weapon, user) {
+  const result = document.createElement("main");
+  result.setAttribute("class", "user-result");
+  const p = document.createElement("p");
+  if (user === "comp") {
+    p.innerHTML = "Computer Choose";
+  }
+  if (user === "user") {
+    p.innerHTML = "You Choose";
+  }
+  const img = document.createElement("img");
+  img.setAttribute("src", `../assets/${weapon}.png`);
+  result.appendChild(p);
+  result.appendChild(img);
+  return result;
+};
+type renderResultType = (weapon: weapon, user: "user" | "comp") => HTMLElement;
 type weapon = "rock" | "paper" | "scissor";
 type scoreType = 1 | 2 | 3;
