@@ -55,3 +55,6 @@ body {
   align-items: center;
   flex-grow: 1;
 }
+.score {
+  margin-top: 5rem;
+}
