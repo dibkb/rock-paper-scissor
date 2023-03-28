@@ -55,14 +55,32 @@ const renderResult: renderResultType = function (weapon, user) {
 };
 const calculateWin: calculateWinType = function (user, comp) {
   const p = document.createElement("p");
-  let innerHTML: string;
   if (user === comp) {
-    innerHTML = result.DRAW;
+    p.innerHTML = result.DRAW;
+    return p;
   }
   switch (user) {
-    case "rock":
-    case "paper":
-    case "scissor":
+    case "rock": {
+      if (comp === "paper") {
+        p.innerHTML = result.LOOSE;
+      } else if (comp === "scissor") {
+        p.innerHTML = result.WIN;
+      }
+    }
+    case "paper": {
+      if (comp === "scissor") {
+        p.innerHTML = result.LOOSE;
+      } else if (comp === "rock") {
+        p.innerHTML = result.WIN;
+      }
+    }
+    case "scissor": {
+      if (comp === "paper") {
+        p.innerHTML = result.LOOSE;
+      } else if (comp === "scissor") {
+        p.innerHTML = result.WIN;
+      }
+    }
   }
   return p;
 };
