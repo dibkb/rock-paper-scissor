@@ -13,7 +13,6 @@ function handleClick(this: HTMLElement): void {
   body.textContent = "";
   const weaponUser = selectedItem.id as weapon;
   const weaponComp = computerWeapon() as weapon;
-  // render winning page-accordingly
   renderWinningPage(weaponUser, weaponComp);
 }
 function computerWeapon(): weapon {

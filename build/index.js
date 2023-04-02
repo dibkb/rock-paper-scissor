@@ -14,7 +14,6 @@ function handleClick() {
     body.textContent = "";
     const weaponUser = selectedItem.id;
     const weaponComp = computerWeapon();
-    // render winning page-accordingly
     renderWinningPage(weaponUser, weaponComp);
 }
 function computerWeapon() {
